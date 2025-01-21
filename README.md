@@ -40,8 +40,8 @@ a rastrear e mudar em todas as subclasses diferentes onde o comportamento é def
 
 Por sorte, tem um princípio de design para esse tipo de situação :)
 
-Design Principle:
-Identifique os aspectos da sua aplicação que variam e separe elas do que não muda.
+**Design Principle:**
+_Identifique os aspectos da sua aplicação que variam e separe elas do que não muda._
 
 Em outras palavras, se você tem algum aspecto do seu código que está mudando , digamos, a cada nova requisição, então você sabe que tem um comportamento que precissa ser sacado e separado de todas as coisas que não mudam.
 
@@ -52,22 +52,42 @@ Tão simples como esse conceito é, isso forma a base para quase todos os design
 Ok, hora de tirar comportamento de Pato fora da classe Pato!
 
 ## Separando o que muda daquilo que se mantem o mesmo
+Por onde começar? Até onde sabemos, além dos problemas com fly() e quack(), a classe Duck está funcionando bem e não tem nenhuma outra parte que pareça variar ou mudar com frequencia. Então, além das poucas mudanças, nós  iremos deixar de lado a classe Duck por hora.
+Agora, para separar as "parte que mudam das partes que se mantém" nós iremos criar dois sets de classes (totalmente separada da classe Duck), uma para fly() e outra para quack(). Casa set de classes irá conter toda a implementação do respectivo comportamento. Por exemplo, nós podemos ter uma classe que implementa _quacking_, outra que implementa _squeaking_, e mais uma que implementa _silence_.
+
+**Nós sabemos que fly() e quack() são parte da classe Duck que varia entre ducks.**
+**Para** separa esses comportamentos da classe Duck, nós iremos retirar ambos os métodos **fora da classe Duck e criar um novo set de classes para representar cada comportamento.** 
 
 ## Designing o comportamento de Pato
+**Então como vamos fazer o design do set de classes que implementam os comportamentos fly() e quack()?**
+
+Nós gostaríamos de manter as coisas flexíveis; afinal, foi a inflexibilidade nos comportamentos de Duck que nos colocou em apuros em primeiro lugar. E nós sabemos que queremos atribuir comportamentos para as instâncias de Duck. 
+Por exemplo, podemos querer instanciar uma nova instância de MallardDuck e inicia-lá com um tipo específico _tipo_ de comportamento fly(). E enquanto estamos lá por que não ter certeza que podemos mudar o comportamento de Duck dinâmicamente? Em outras palavras, nós devemos incluir métodos setter de comportamentos nas classes Duck para que possamos mudar o comportamento fly() de MallardDuck no runtime.
+
+Dado os objetivos, vamos olhar para nosso segundo design principle:
+**Design Principle**
+_"Programe para uma interface, não para uma implementação"_
+
+Nós iremos usar uma interface para representar cada comportamento - por exemplo, FlyBehavior e QuackBehavior - e cada implementação de um _behavior_ irá implementar uma dessas interfaces.
+Então desta vez não será as classes de Ducks que implementarão o flying e quacking interfaces. Ao invés, nós iremos fazer um conjunto de classes nas quais a razão para viver é para representar um comportamento (por exemplo, "squeaking"), é sua classe de comportamento, em vez da classe Duck, que irão implementar o comportamento da interface.
+
+Com nosso novo design, a Duck subclasses irão usar um comportamento representado por uma interface (FlyBehavior e QuackBehavior), para que a implementação real do comportamento (em outras palavras, o comportamento concreto específico codificado na classe que implementa o flybehavior ou quackbehavior não será trancada na subclasses Duck.
 
 ## "Programe para uma interface" realmente significa "Programe para um supertipo."
 
-## Implementando os comportamentos de Pato
+A palavra interface está sobrecarregada aqui. Existe o conceito de interface, mas também existe a Java _construct_ de uma interface. Você pode programar para uma interface sem precisar usar uma interface Java. O objetivo é explorar o polimofismo programando para um supertipo, de modo que os objetos de tempo de execução reais assumidos varuabkes cab ve se houver alguma implementação concreta do supertipo, o que significa que a classe que os declara não precisa saber sobre os tipos de objetos reais!
 
-## Integrando os comportamentos de Pato
+## Implementando os comportamentos de Duck
+
+## Integrando os comportamentos de Duck
 
 ## Mais Integração
 
-## Testando o código do Pato
+## Testando o código do Duck
 
-## Escreva e compile o VoaComportamento interface e as duas classes de implementação de comportamentos (VoaComAsas e NaoVoa).
+## Escreva e compile o VoaComportamento interface e as duas classes de implementação de comportamentos (FlyWithWings e FlyNoWay).
 
-## Testando o código do Pato, continuação...
+## Testando o código do Duck, continuação...
 
 ## Setando o comportamento dinamicamente
 
@@ -79,7 +99,7 @@ Ok, hora de tirar comportamento de Pato fora da classe Pato!
 
 Você acabou de aplicar seu primeiro pattern, o **STRATEGY PATTERN**. Você usou o Strategy para refatorar o app SimDuck.
 Graças à esse pattern, o simulador está pronto para quaisquer mudanças.
-Agora que percorremos um longo caminho para aprendê-lom aqui vai uma definição formal desse pattern.
+Agora que percorremos um longo caminho para aprendê-lo, aqui vai uma definição formal desse pattern.
 
 **The Strategy Pattern** define uma família de algoritmos, encapsula cada um, e faz eles serem intercambiáveis. 
 O Strategy permite o algoritmo variarem independentemente dos clientes que a utilizam.
