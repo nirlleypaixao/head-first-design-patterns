@@ -7,22 +7,24 @@ Nesse capítulo, você vai aprender porque e como você pode explorar o conhecim
 ## Tudo começou com um simples app de simulador de patos
 
 Joe trabalha para uma empresa que faz um game de sucesso um simulador de lagoa de patos, o **SimDuck**. O jogo pode mostrar uma larga variedade de espécies de patos nadando e fazendo sons de *quack*. Os designers iniciais do sistema usaram técnicas de OO padrão e criaram uma superclass `Pato` na qual todos os outros tipos de pato herdam.
-<image>
+![Duck](Duck.png "SimDuck-UML")
+
 ## Mas agora nós precisamos que os patos VOEM!
 Os executivos decidiram que patos voadores são o que o simulador precisa para varrer a concorrência. E, claro, o gerente do Joe disse pra ele que não seria um problema para o Joe criar algo em uma semana. Afinal — disse o gerente — "ele é *O Cara* na programação OO".
-<image>
+![Duck](Duck-Fly.png "SimDuck-UML")
 
 ## Mas algo terrivelmente deu errado...
 *O que aconteceu?*  
 Joe falhou em notar que nem todas as subclasses de `Pato` devem VOAR. Quando Joe adicionou novos comportamentos para a superclasse `Pato`, ele também estava adicionando comportamentos que não eram apropriados para algumas subclasses de `Pato`. Agora ele possui alguns objetos inanimados voando, como Patos de Borracha, no **SimDuck**.
-<img src="">
+![Duck](Duck-Something-Went-Wrong.png "SimDuck-UML")
 
 ## Que tal uma interface?
 Joe percebeu que herança provavelmente não foi a solução, porque ele pegou uma anotação que diz que os executivos desejam atualizar o SimDuck a cada 6 meses (de uma maneira que eles ainda não decidiram).
 Joe sabe que as especificações continuarão mudando e ele seria forçado em olhar e possivelmente fazer um override de voa() e quack() para cada nova subclasse de Pato que serão adicionadas para o programa... Eternamente.
 
 Então, ele precisa de uma maneira mais elegante para ter somente algumas (mas não todas) dos tipos pato voa ou quack.
-<img src="">
+![Duck](Duck-Inrterfaces.png "SimDuck-UML")
+
 
 ## O que você faria se fosse o Joe?
 Nós sabemos que nem todas as subclasses devem ter comportamentos voa ou quack, então herança não é a resposta certa. Mas enquanto temos subclasses implementando Voa ou Quack resolve parte do problema (sem patos de borrachas voadores), isso destrói complemente o reuso do código para esses comportamentos, então isso cria um novo pesadelo de manutenção. E claro pode ter mais que um tipo de comportamento voa() mesmo entre patos que fly()
