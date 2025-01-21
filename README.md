@@ -88,7 +88,7 @@ Esses conjuntos de classes encapsularão os comportamentos variáveis, enquanto 
 
 ---
 
-## Fazendo o design dos comportamentos de pato
+## Projetando o design dos comportamentos de Duck
 
 Como podemos projetar o conjunto de classes que implementam os comportamentos fly() e quack()?
 
@@ -108,25 +108,12 @@ Com esse novo design, as subclasses de Duck usarão um comportamento representad
 
 ---
 
-### **Princípio de Design: Programe para uma interface, não para uma implementação.**
+### **"Programar para uma interface" realmente significa "programar para um supertipo."**
 
-Utilizaremos interfaces para representar os comportamentos, como `FlyBehavior` e `QuackBehavior`.  
-Em vez das classes de pato implementarem diretamente esses comportamentos, criaremos classes dedicadas para representar os diferentes tipos de comportamento.
+A palavra interface está sendo usada de forma sobrecarregada aqui. Existe o conceito de uma interface, mas também o constructo de uma interface do Java. Você pode programar para uma interface sem precisar realmente usar alguma interface do Java. A ideia é explorar o polimorfismo programando para um supertipo, de modo que o objeto real em tempo de execução não fique fixo no código. E poderíamos reformular 'programar para um supertipo' como o tipo declarado de uma variável devendo ser um supertipo, geralmente uma classe abstrata ou interface, para que os objetos atribuídos a essas variáveis possam ser de qualquer implementação concreta do supertipo, o que significa que a classe que as declara não precisa saber sobre os tipos reais dos objetos!
+
 
 ---
-
-## Conclusão
-
-Com o novo design, as subclasses de `Duck` não implementarão diretamente os comportamentos de voo ou som.  
-Em vez disso, elas utilizarão objetos que representam esses comportamentos por meio de interfaces (`FlyBehavior` e `QuackBehavior`).
-
-Isso permite:
-- Alterar comportamentos facilmente;
-- Evitar código duplicado;
-- Tornar o sistema mais flexível e preparado para mudanças futuras.
-
-Ao encapsular os comportamentos variáveis, alcançamos um design limpo e sustentável, alinhado aos princípios de orientação a objetos.
-
 
 ## Implementando os comportamentos de Duck
 
