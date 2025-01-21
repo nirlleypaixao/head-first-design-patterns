@@ -45,7 +45,7 @@ Essa abordagem o prenderia em um ciclo infinito de manutenção.
 
 Ele precisa de uma maneira mais elegante de permitir que apenas algumas, mas não todas, as subclasses de pato sejam capazes de voar ou emitir som.
 
-![Pseudo diagrama UML ](Duck-Interfaces.png)
+![Pseudo diagrama UML ](Duck-Inrterfaces.png)
 
 ---
 
