@@ -1,6 +1,6 @@
 package chapter1.theduckgame;
 
-public interface QuackComportamento {
+public interface QuackBehavior {
     public void quack();
 }
 
