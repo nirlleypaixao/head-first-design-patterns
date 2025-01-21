@@ -1,4 +1,5 @@
-# Capítulo 1: Bem-Vindos ao Design Patterns
+# Capítulo 1: Bem-Vindos ao Design Patterns (páginas 1 - 24)
+[Leia o livro na íntegra aqui]([docs/guia.md](https://www.pdfiles.net/pdf/view/Head-First-Design-Patterns-2nd-Edition))
 
 ## Alguém já resolveu seus problemas
 
