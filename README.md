@@ -56,8 +56,6 @@ Implementar diretamente esses comportamentos nas subclasses resolveria parte do 
 
 Além disso, pode haver mais de um tipo de comportamento para `fly()`, mesmo entre patos que realmente voam.
 
----
-
 ## Zerando o problema
 Sabemos que usar herança não funcionou muito bem, já que o comportamento dos patos continua mudando entre as subclasses, e não é adequado que todas as subclasses possuam os mesmos comportamentos.
 
