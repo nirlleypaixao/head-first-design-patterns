@@ -56,9 +56,9 @@ Por onde começar? Até onde sabemos, além dos problemas com fly() e quack(), a
 Agora, para separar as "parte que mudam das partes que se mantém" nós iremos criar dois sets de classes (totalmente separada da classe Duck), uma para fly() e outra para quack(). Casa set de classes irá conter toda a implementação do respectivo comportamento. Por exemplo, nós podemos ter uma classe que implementa _quacking_, outra que implementa _squeaking_, e mais uma que implementa _silence_.
 
 **Nós sabemos que fly() e quack() são parte da classe Duck que varia entre ducks.**
-**Para** separa esses comportamentos da classe Duck, nós iremos retirar ambos os métodos **fora da classe Duck e criar um novo set de classes para representar cada comportamento.** 
+**Para** separar esses comportamentos da classe Duck, nós iremos retirar ambos os métodos **fora da classe Duck e criar um novo set de classes para representar cada comportamento.** 
 
-## Designing o comportamento de Pato
+## Fazendo o design do comportamento de Pato
 **Então como vamos fazer o design do set de classes que implementam os comportamentos fly() e quack()?**
 
 Nós gostaríamos de manter as coisas flexíveis; afinal, foi a inflexibilidade nos comportamentos de Duck que nos colocou em apuros em primeiro lugar. E nós sabemos que queremos atribuir comportamentos para as instâncias de Duck. 
