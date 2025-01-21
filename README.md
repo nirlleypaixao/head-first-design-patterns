@@ -1,73 +1,134 @@
 # Capítulo 1: Bem-Vindos ao Design Patterns
 
-## Alguém já resolveu seus problemas
+# Alguém já resolveu seus problemas
 
-Nesse capítulo, você vai aprender porque e como você pode explorar o conhecimento e lições aprendidas por outros desenvolvedores que já estiveram com os mesmos problemas de design e sobreviveram à jornada.
+Neste capítulo, você aprenderá por que e como pode aproveitar o conhecimento e as lições aprendidas por outros desenvolvedores que enfrentaram os mesmos problemas de design e superaram esses desafios.
 
-## Tudo começou com um simples app de simulador de patos
+---
 
-Joe trabalha para uma empresa que faz um game de sucesso um simulador de lagoa de patos, o **SimDuck**. O jogo pode mostrar uma larga variedade de espécies de patos nadando e fazendo sons de *quack*. Os designers iniciais do sistema usaram técnicas de OO padrão e criaram uma superclass `Pato` na qual todos os outros tipos de pato herdam.
-![Duck](Duck.png "SimDuck-UML")
+## Tudo começou com um simples simulador de patos
 
-## Mas agora nós precisamos que os patos VOEM!
-Os executivos decidiram que patos voadores são o que o simulador precisa para varrer a concorrência. E, claro, o gerente do Joe disse pra ele que não seria um problema para o Joe criar algo em uma semana. Afinal — disse o gerente — "ele é *O Cara* na programação OO".
-![Duck](Duck-Fly.png "SimDuck-UML")
+Joe trabalha para uma empresa que desenvolve um jogo de simulação de lago de patos de grande sucesso, chamado **SimDuck**.  
+O jogo apresenta uma grande variedade de espécies de patos, que nadam e emitem sons de "quack".  
+Os primeiros designers do sistema utilizaram técnicas clássicas de programação orientada a objetos (OO) e criaram uma superclasse `Duck`, da qual todas as outras classes de pato herdam.
 
-## Mas algo terrivelmente deu errado...
-*O que aconteceu?*  
-Joe falhou em notar que nem todas as subclasses de `Pato` devem VOAR. Quando Joe adicionou novos comportamentos para a superclasse `Pato`, ele também estava adicionando comportamentos que não eram apropriados para algumas subclasses de `Pato`. Agora ele possui alguns objetos inanimados voando, como Patos de Borracha, no **SimDuck**.
-![Duck](Duck-Something-Went-Wrong.png "SimDuck-UML")
+![Pseudo diagrama UML ](Duck.png)
 
-## Que tal uma interface?
-Joe percebeu que herança provavelmente não foi a solução, porque ele pegou uma anotação que diz que os executivos desejam atualizar o SimDuck a cada 6 meses (de uma maneira que eles ainda não decidiram).
-Joe sabe que as especificações continuarão mudando e ele seria forçado em olhar e possivelmente fazer um override de voa() e quack() para cada nova subclasse de Pato que serão adicionadas para o programa... Eternamente.
+---
 
-Então, ele precisa de uma maneira mais elegante para ter somente algumas (mas não todas) dos tipos pato voa ou quack.
-![Duck](Duck-Inrterfaces.png "SimDuck-UML")
+## Mas agora precisamos que os patos VOEM!
 
+Os executivos decidiram que patos voadores são o que o simulador precisa para superar a concorrência.  
+Claro, o gerente de Joe disse a todos que isso não seria um problema para ele.  
+*"Afinal", disse o gerente, "Joe é **O Cara** da programação orientada a objetos!"*
+
+![Pseudo diagrama UML ](Duck-Fly.png)
+
+---
+
+## Mas algo deu terrivelmente errado...
+### *O que aconteceu?*
+
+Joe não percebeu que nem todas as subclasses de `Duck` deveriam ser capazes de voar.  
+Quando ele adicionou novos comportamentos na superclasse `Duck`, acabou incluindo funcionalidades que não eram adequadas para algumas subclasses.  
+Como resultado, agora o jogo tem objetos como **patos de borracha voando** no **SimDuck**!
+
+![Pseudo diagrama UML ](Duck-Something-Went-Wrong.png)
+
+---
+
+## Que tal usar uma interface?
+
+Joe percebeu que a herança provavelmente não era a solução ideal, especialmente porque ele soube que os executivos querem que o SimDuck seja atualizado a cada 6 meses com novos recursos.  
+Joe sabe que as especificações continuarão mudando, e ele teria que sobrescrever constantemente os métodos `fly()` e `quack()` em cada nova subclasse de `Duck` que for adicionada ao programa.  
+Essa abordagem o prenderia em um ciclo infinito de manutenção.
+
+Ele precisa de uma maneira mais elegante de permitir que apenas algumas, mas não todas, as subclasses de pato sejam capazes de voar ou emitir som.
+
+![Pseudo diagrama UML ](Duck-Inrterfaces.png)
+
+---
 
 ## O que você faria se fosse o Joe?
-Nós sabemos que nem todas as subclasses devem ter comportamentos voa ou quack, então herança não é a resposta certa. Mas enquanto temos subclasses implementando Voa ou Quack resolve parte do problema (sem patos de borrachas voadores), isso destrói complemente o reuso do código para esses comportamentos, então isso cria um novo pesadelo de manutenção. E claro pode ter mais que um tipo de comportamento voa() mesmo entre patos que fly()
 
-A este ponto você deve estar esperando por um Design Pattern cavalgando em um azalão branco para salvar o dia. Mas que diversão isso teria? Não, nós vamos descobrir uma solução a moda antiga aplicando o bom e velho OO, princípios de software design.
+Sabemos que nem todas as subclasses devem ter os comportamentos `fly` ou `quack`, então **a herança não é a resposta certa**.  
+Implementar diretamente esses comportamentos nas subclasses resolveria parte do problema, mas destruiria completamente a reutilização de código e criaria um pesadelo de manutenção.
+
+Além disso, pode haver mais de um tipo de comportamento para `fly()`, mesmo entre patos que realmente voam.
+
+---
 
 ## Zerando o problema
-Então nós sabemos que usar herança não funcionou muito bem, desde que o comportamento de Pato
-continua mudando através das subclasses, e não é apropriado para todas as subclasses ter tais comportamentos.
-As interfaces Flyable e Quackable soavam promissoras a primeira vista - somente patos que realmente voavam terão Flyable, e etc. - Exceto 
-Java que tipicamente não tem código de implementação, então nenhum reuso de código. Em nenhum dos casos, a cada momento que você precisa modificar o comportamento, você será frequentemente forçado
-a rastrear e mudar em todas as subclasses diferentes onde o comportamento é definido, provavelmente introduzindo alguns bugs pelo caminho.
+Sabemos que usar herança não funcionou muito bem, já que o comportamento dos patos continua mudando entre as subclasses, e não é adequado que todas as subclasses possuam os mesmos comportamentos.
 
-Por sorte, tem um princípio de design para esse tipo de situação :)
+As interfaces Flyable e Quackable pareceram promissoras à primeira vista – apenas patos que realmente voam implementariam Flyable e assim por diante.
+Porém, em Java, interfaces geralmente não contêm código de implementação, o que impede a reutilização de código.
 
-Design Principle:
-Identifique os aspectos da sua aplicação que variam e separe elas do que não muda.
+Em qualquer caso, sempre que fosse necessário modificar um comportamento, seria preciso rastrear e alterar todas as subclasses onde esse comportamento foi definido, o que provavelmente introduziria bugs ao longo do processo.
 
-Em outras palavras, se você tem algum aspecto do seu código que está mudando , digamos, a cada nova requisição, então você sabe que tem um comportamento que precissa ser sacado e separado de todas as coisas que não mudam.
+Por sorte, existe um princípio de design para lidar com esse tipo de situação:
 
-Aqui está outra maneira de pensar sobre esse princípio: *pegue as partes que variam e encapsule elas, para que você possa alterar ou estender as partes que variam sem afetar aquelas que não variam.*
+### **Princípio de Design: Identifique os aspectos que variam e separe-os do que permanece constante.**
 
-Tão simples como esse conceito é, isso forma a base para quase todos os design patterns. Todos os patterns fornecem uma maneira para deixar *alguma parte de um sistema variar independentemente das demais partes*.
+Se você tem algo no código que muda frequentemente (como o comportamento de voo ou som), deve isolar essa parte das demais que não variam.  
+Isso permite que você altere ou estenda as partes variáveis sem afetar as partes fixas.
 
-Ok, hora de tirar comportamento de Pato fora da classe Pato!
+---
 
-## Separando o que muda daquilo que se mantem o mesmo
+## Separando o que muda do que se mantem o mesmo em `Duck`!
 
-## Designing o comportamento de Pato
+Por onde começamos? Pelo que podemos perceber, tirando os problemas com os métodos fly() e quack(), a classe Duck está funcionando bem, e não há outras partes que aparentem variar ou mudar com frequência. Então, com exceção de algumas pequenas alterações, vamos deixar a classe Duck praticamente intacta.
 
-## "Programe para uma interface" realmente significa "Programe para um supertipo."
+Agora, para separar as partes que mudam das que permanecem as mesmas, vamos criar dois conjuntos de classes (totalmente independentes da classe Duck): um para o comportamento de voo (fly) e outro para o comportamento de som (quack).
+Cada conjunto de classes conterá todas as implementações do comportamento respectivo. Por exemplo, podemos ter uma classe que implemente o comportamento de "quack", outra que implemente "squeak" (guincho) e outra que implemente o silêncio.
 
-## Implementando os comportamentos de Pato
+Esses conjuntos de classes encapsularão os comportamentos variáveis, enquanto a classe `Duck` permanecerá responsável apenas pelos atributos e comportamentos comuns a todos os patos.
+**Nós sabemos que fly() e quack() são partes de Duck que variam entre Ducks**
+**Para** separar esses comportamentos da classe Duck, nós iremos **tirar ambos os métodos fora da classe Duck e criar um novo conjunto de classes para representar cada comportamento.** 
 
-## Integrando os comportamentos de Pato
+![Pseudo diagrama UML ](Duck-Behaviors.png)
+
+---
+
+## Fazendo o design dos comportamentos de pato
+
+O objetivo é tornar o design flexível. Por exemplo:
+- Queremos que uma nova instância de `MallardDuck` tenha um comportamento específico para `fly()` e `quack()`.
+- Também queremos permitir que o comportamento de um pato possa ser alterado dinamicamente, usando métodos *setters* para os comportamentos.
+
+---
+
+### **Princípio de Design: Programe para uma interface, não para uma implementação.**
+
+Utilizaremos interfaces para representar os comportamentos, como `FlyBehavior` e `QuackBehavior`.  
+Em vez das classes de pato implementarem diretamente esses comportamentos, criaremos classes dedicadas para representar os diferentes tipos de comportamento.
+
+---
+
+## Conclusão
+
+Com o novo design, as subclasses de `Duck` não implementarão diretamente os comportamentos de voo ou som.  
+Em vez disso, elas utilizarão objetos que representam esses comportamentos por meio de interfaces (`FlyBehavior` e `QuackBehavior`).
+
+Isso permite:
+- Alterar comportamentos facilmente;
+- Evitar código duplicado;
+- Tornar o sistema mais flexível e preparado para mudanças futuras.
+
+Ao encapsular os comportamentos variáveis, alcançamos um design limpo e sustentável, alinhado aos princípios de orientação a objetos.
+
+
+## Implementando os comportamentos de Duck
+
+## Integrando os comportamentos de Duck
 
 ## Mais Integração
 
-## Testando o código do Pato
+## Testando o código do Duck
 
-## Escreva e compile o VoaComportamento interface e as duas classes de implementação de comportamentos (VoaComAsas e NaoVoa).
+## Escreva e compile o VoaComportamento interface e as duas classes de implementação de comportamentos (FlyWithWings e FlyNoWay).
 
-## Testando o código do Pato, continuação...
+## Testando o código do Duck, continuação...
 
 ## Setando o comportamento dinamicamente
 
@@ -79,7 +140,7 @@ Ok, hora de tirar comportamento de Pato fora da classe Pato!
 
 Você acabou de aplicar seu primeiro pattern, o **STRATEGY PATTERN**. Você usou o Strategy para refatorar o app SimDuck.
 Graças à esse pattern, o simulador está pronto para quaisquer mudanças.
-Agora que percorremos um longo caminho para aprendê-lom aqui vai uma definição formal desse pattern.
+Agora que percorremos um longo caminho para aprendê-lo, aqui vai uma definição formal desse pattern.
 
 **The Strategy Pattern** define uma família de algoritmos, encapsula cada um, e faz eles serem intercambiáveis. 
 O Strategy permite o algoritmo variarem independentemente dos clientes que a utilizam.
