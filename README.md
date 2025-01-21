@@ -99,6 +99,7 @@ Queremos manter as coisas flexíveis; afinal, foi a falta de flexibilidade nos c
 E, enquanto estamos nisso, por que não garantir que possamos alterar o comportamento de um pato dinamicamente? Em outras palavras, devemos incluir métodos setter nas classes Duck para que possamos modificar o comportamento de voo (fly()) de um MallardDuck durante a execução do programa.
 
 Com esses objetivos em mente, vamos considerar nosso segundo princípio de design:
+
 **Princípio de Design:** _Programe para uma interface, não para uma implementação._
 
 Vamos usar uma interface para representar cada comportamento – por exemplo, FlyBehavior e QuackBehavior. Cada implementação de um comportamento será representada por uma classe que implementará uma dessas interfaces. Dessa vez, as classes de pato não irão implementar diretamente as interfaces de voo (FlyBehavior) ou som (QuackBehavior).
