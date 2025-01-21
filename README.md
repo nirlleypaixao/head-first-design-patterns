@@ -6,23 +6,23 @@ Nesse capítulo, você vai aprender porque e como você pode explorar o conhecim
 
 ## Tudo começou com um simples app de simulador de patos
 
-Joe trabalha para uma empresa que faz um game de sucesso um simulador de lagoa de patos, o **SimDuck**. O jogo pode mostrar uma larga variedade de espécies de patos nadando e fazendo sons de *quack*. Os designers iniciais do sistema usaram técnicas de OO padrão e criaram uma superclass `Pato` na qual todos os outros tipos de pato herdam.
+Joe trabalha para uma empresa que faz um game de sucesso um simulador de lagoa de patos, o **SimDuck**. O jogo pode mostrar uma larga variedade de espécies de patos nadando e fazendo sons de *quack*. Os designers iniciais do sistema usaram técnicas de OO padrão e criaram uma superclass `Duck` na qual todos os outros tipos de Duck herdam.
 ![Duck](Duck.png "SimDuck-UML")
 
 ## Mas agora nós precisamos que os patos VOEM!
-Os executivos decidiram que patos voadores são o que o simulador precisa para varrer a concorrência. E, claro, o gerente do Joe disse pra ele que não seria um problema para o Joe criar algo em uma semana. Afinal — disse o gerente — "ele é *O Cara* na programação OO".
+Os executivos decidiram que patos voadores são o que o simulador precisa para varrer a concorrência. E, claro, o gerente do Joe disse para eles que não seria um problema para o Joe criar algo em uma semana. Afinal — disse o gerente — "ele é *O Cara* na programação OO".
 ![Duck](Duck-Fly.png "SimDuck-UML")
 
-## Mas algo terrivelmente deu errado...
+## Mas algo deu terrivelmente errado...
 *O que aconteceu?*  
-Joe falhou em notar que nem todas as subclasses de `Pato` devem VOAR. Quando Joe adicionou novos comportamentos para a superclasse `Pato`, ele também estava adicionando comportamentos que não eram apropriados para algumas subclasses de `Pato`. Agora ele possui alguns objetos inanimados voando, como Patos de Borracha, no **SimDuck**.
+Joe falhou em notar que nem todas as subclasses de `Duck` devem VOAR. Quando Joe adicionou novos comportamentos para a superclasse `Duck`, ele também estava adicionando comportamentos que não eram apropriados para algumas subclasses de `Duck`. Agora ele possui alguns objetos inanimados voando, como pato de Borracha, no **SimDuck**.
 ![Duck](Duck-Something-Went-Wrong.png "SimDuck-UML")
 
 ## Que tal uma interface?
 Joe percebeu que herança provavelmente não foi a solução, porque ele pegou uma anotação que diz que os executivos desejam atualizar o SimDuck a cada 6 meses (de uma maneira que eles ainda não decidiram).
-Joe sabe que as especificações continuarão mudando e ele seria forçado em olhar e possivelmente fazer um override de voa() e quack() para cada nova subclasse de Pato que serão adicionadas para o programa... Eternamente.
+Joe sabe que as especificações continuarão mudando e ele seria forçado em olhar e possivelmente fazer um override de voa() e quack() para cada nova subclasse de Duck que serão adicionadas para o programa... Eternamente.
 
-Então, ele precisa de uma maneira mais elegante para ter somente algumas (mas não todas) dos tipos pato voa ou quack.
+Então, ele precisa de uma maneira mais elegante para ter somente algumas (mas não todas) dos tipos duck voe ou faça quack.
 ![Duck](Duck-Inrterfaces.png "SimDuck-UML")
 
 
