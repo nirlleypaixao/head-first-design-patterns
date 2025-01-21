@@ -92,10 +92,20 @@ Esses conjuntos de classes encapsularão os comportamentos variáveis, enquanto 
 
 ## Fazendo o design dos comportamentos de pato
 
-O objetivo é tornar o design flexível. Por exemplo:
-- Queremos que uma nova instância de `MallardDuck` tenha um comportamento específico para `fly()` e `quack()`.
-- Também queremos permitir que o comportamento de um pato possa ser alterado dinamicamente, usando métodos *setters* para os comportamentos.
+Como podemos projetar o conjunto de classes que implementam os comportamentos fly() e quack()?
 
+Queremos manter as coisas flexíveis; afinal, foi a falta de flexibilidade nos comportamentos dos patos que nos colocou em apuros desde o início. Também sabemos que queremos atribuir comportamentos específicos às instâncias da classe Duck. Por exemplo, podemos criar uma nova instância de MallardDuck e inicializá-la com um comportamento específico de voo (fly()).
+
+E, enquanto estamos nisso, por que não garantir que possamos alterar o comportamento de um pato dinamicamente? Em outras palavras, devemos incluir métodos setter nas classes Duck para que possamos modificar o comportamento de voo (fly()) de um MallardDuck durante a execução do programa.
+
+Com esses objetivos em mente, vamos considerar nosso segundo princípio de design:
+**Princípio de Design:** _Programe para uma interface, não para uma implementação._
+
+Vamos usar uma interface para representar cada comportamento – por exemplo, FlyBehavior e QuackBehavior. Cada implementação de um comportamento será representada por uma classe que implementará uma dessas interfaces. Dessa vez, as classes de pato não irão implementar diretamente as interfaces de voo (FlyBehavior) ou som (QuackBehavior).
+
+Em vez disso, criaremos um conjunto de classes cuja única responsabilidade será representar comportamentos específicos (por exemplo, "squeaking" ou "silence"). Essas classes de comportamento, e não as subclasses de Duck, irão implementar as interfaces correspondentes.
+
+Com esse novo design, as subclasses de Duck usarão um comportamento representado por uma interface (FlyBehavior e QuackBehavior). Isso significa que a implementação real dos comportamentos (ou seja, o código concreto das classes que implementam FlyBehavior ou QuackBehavior) não estará presa às subclasses de Duck.
 ---
 
 ### **Princípio de Design: Programe para uma interface, não para uma implementação.**
