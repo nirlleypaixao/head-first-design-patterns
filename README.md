@@ -1,6 +1,6 @@
 # Capítulo 1: Bem-Vindos ao Design Patterns
 
-# Alguém já resolveu seus problemas
+## Alguém já resolveu seus problemas
 
 Neste capítulo, você aprenderá por que e como pode aproveitar o conhecimento e as lições aprendidas por outros desenvolvedores que enfrentaram os mesmos problemas de design e superaram esses desafios.
 
@@ -46,8 +46,6 @@ Implementar diretamente esses comportamentos nas subclasses resolveria parte do 
 
 Além disso, pode haver mais de um tipo de comportamento para `fly()`, mesmo entre patos que realmente voam.
 
----
-
 ## Zerando o problema
 Sabemos que usar herança não funcionou muito bem, já que o comportamento dos patos continua mudando entre as subclasses, e não é adequado que todas as subclasses possuam os mesmos comportamentos.
 
@@ -58,7 +56,7 @@ Em qualquer caso, sempre que fosse necessário modificar um comportamento, seria
 
 Por sorte, existe um princípio de design para lidar com esse tipo de situação:
 
-### **Princípio de Design: Identifique os aspectos que variam e separe-os do que permanece constante.**
+### **Design Principle: Identifique os aspectos que variam e separe-os do que permanece constante.**
 
 Se você tem algo no código que muda frequentemente (como o comportamento de voo ou som), deve isolar essa parte das demais que não variam.  
 Isso permite que você altere ou estenda as partes variáveis sem afetar as partes fixas.
@@ -76,8 +74,6 @@ Esses conjuntos de classes encapsularão os comportamentos variáveis, enquanto 
 
 ![Pseudo diagrama UML ](Duck-Behaviors.png)
 
----
-
 ## Projetando o design dos comportamentos de Duck
 
 Como podemos projetar o conjunto de classes que implementam os comportamentos fly() e quack()?
@@ -88,8 +84,7 @@ E, enquanto estamos nisso, por que não garantir que possamos alterar o comporta
 
 Com esses objetivos em mente, vamos considerar nosso segundo princípio de design:
 
-### Design Principle 
-Programe para uma interface, não para uma implementação.
+### **Design Principle: Programe para uma interface, não para uma implementação.**
 
 Vamos usar uma interface para representar cada comportamento – por exemplo, FlyBehavior e QuackBehavior. Cada implementação de um comportamento será representada por uma classe que implementará uma dessas interfaces. Dessa vez, as classes de pato não irão implementar diretamente as interfaces de voo (FlyBehavior) ou som (QuackBehavior).
 
@@ -287,8 +282,7 @@ Quando você põe duas classes juntas como essa, você está utilizando **compos
 
 Isso é uma técnica importante, na verdade, é a base do nosso terceiro princípio de design:
 
-### Design Principle
-Prefira composição ante herança
+### **Design Principle: Prefira composição ante herança**
 
 Como você pôde ver, criar sistemas usando composition dá muito mais flexibiidade. Não somente permite você encapsular uma família de algoritmos em seus próprios conjuntos de classes, como também permite você **mudar o comportamento em runtime** desde que o objeto que você esteja compondo com implements a interface de comportamento correta.
 
