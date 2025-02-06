@@ -11,7 +11,7 @@ Joe trabalha para uma empresa que desenvolve um jogo de simulação de lago de p
 O jogo apresenta uma grande variedade de espécies de patos, que nadam e emitem sons de "quack".  
 Os primeiros designers do sistema utilizaram técnicas clássicas de programação orientada a objetos (OO) e criaram uma superclasse `Duck`, da qual todas as outras classes de pato herdam.
 
-![Pseudo diagrama UML ](Duck.png)
+![Duck.png](images/Duck.png))
 
 ## Mas agora precisamos que os patos VOEM!
 
@@ -19,7 +19,7 @@ Os executivos decidiram que patos voadores são o que o simulador precisa para s
 Claro, o gerente de Joe disse a todos que isso não seria um problema para ele.  
 *"Afinal", disse o gerente, "Joe é **O Cara** da programação orientada a objetos!"*
 
-![Pseudo diagrama UML ](Duck-Fly.png)
+![Duck-Fly.png](images/Duck-Fly.png)
 
 ## Mas algo deu terrivelmente errado...
 ### *O que aconteceu?*
@@ -28,7 +28,7 @@ Joe não percebeu que nem todas as subclasses de `Duck` deveriam ser capazes de 
 Quando ele adicionou novos comportamentos na superclasse `Duck`, acabou incluindo funcionalidades que não eram adequadas para algumas subclasses.  
 Como resultado, agora o jogo tem objetos como **patos de borracha voando** no **SimDuck**!
 
-![Pseudo diagrama UML ](Duck-Something-Went-Wrong.png)
+![Duck-Something-Went-Wrong.png](images/Duck-Something-Went-Wrong.png)
 
 ## Que tal usar uma interface?
 
@@ -38,7 +38,7 @@ Essa abordagem o prenderia em um ciclo infinito de manutenção.
 
 Ele precisa de uma maneira mais elegante de permitir que apenas algumas, mas não todas, as subclasses de pato sejam capazes de voar ou emitir som.
 
-![Pseudo diagrama UML ](Duck-Inrterfaces.png)
+![Duck-Inrterfaces.png](images/Duck-Inrterfaces.png)
 
 ## O que você faria se fosse o Joe?
 
@@ -73,7 +73,7 @@ Esses conjuntos de classes encapsularão os comportamentos variáveis, enquanto 
 **Nós sabemos que fly() e quack() são partes de Duck que variam entre Ducks**
 **Para** separar esses comportamentos da classe Duck, nós iremos **tirar ambos os métodos fora da classe Duck e criar um novo conjunto de classes para representar cada comportamento.**
 
-![Pseudo diagrama UML ](Duck-Behaviors.png)
+![Duck-Behaviors.png](images/Duck-Behaviors.png)
 
 ## Projetando o design dos comportamentos de Duck
 
@@ -83,14 +83,10 @@ Queremos manter as coisas flexíveis; afinal, foi a falta de flexibilidade nos c
 
 E, enquanto estamos nisso, por que não garantir que possamos alterar o comportamento de um pato dinamicamente? Em outras palavras, devemos incluir métodos setter nas classes Duck para que possamos modificar o comportamento de voo (fly()) de um MallardDuck durante a execução do programa.
 
-Com esses objetivos em mente, vamos considerar nosso segundo princípio de design:
+Com esses objetivos em mente, vamos considerar nosso segundo princípio de design.
 
-<<<<<<< HEAD:src/chapter1/theduckgame/README.md
-### Design Principle 
-Programe para uma interface, não para uma implementação.
-=======
 ### **Design Principle: Programe para uma interface, não para uma implementação.**
->>>>>>> 2e795569b0f8dc7b52dca038fdb13dfcb27b35f7:README.md
+
 
 Vamos usar uma interface para representar cada comportamento – por exemplo, FlyBehavior e QuackBehavior. Cada implementação de um comportamento será representada por uma classe que implementará uma dessas interfaces. Dessa vez, as classes de pato não irão implementar diretamente as interfaces de voo (FlyBehavior) ou som (QuackBehavior).
 
@@ -106,7 +102,7 @@ A palavra interface está sendo usada de forma sobrecarregada aqui. Existe o con
 
 Aqui nós temos duas interfaces, FlyBehavior e QuackBehavior, juntamente com as classes correspondentes que implementam cada comportamento.
 
-![Pseudo diagrama UML ](Duck-Implementing-Behavior.png)
+![Duck-Implementing-Behavior.png](images/Duck-Implementing-Behavior.png)
 
 **Note:** 
 Com esse design, outros tipos de objetos pode reutilizar nossos comportamentos fly() e quack() por que tais comportamento não estão mais escondidos em nossas classes Duck.
@@ -125,7 +121,7 @@ Iremos também remover os métodos fly() e quack() da classe Duck (e qualquer su
 
 Vamos substituir fly() e quack() em Duck com dois métodos similares, chamados performFly() e performQuack; você irá ver como eles funcionam depois.
 
-![Pseudo diagrama UML ](Duck-Integrating.png)
+![Duck-Integrating.png](images/Duck-Integrating.png)
 
 - **2 Agora vamos implementar performQuack():** 
  
@@ -268,6 +264,7 @@ Execute o código!
 ```
 
 Para mudar um comportamento de Duck em runtime, apenas chame os setters de Duck e altere para comportamento desejado.
+
 ## A grande sacada em encapsular comportamentos
 
 **Ok, agora que mergulhamos a fundo no design do Duck Simulator, é hora de dar uma pausa e dar olhada no projeto.**
@@ -279,7 +276,7 @@ Pense a respeito: no design de SimDuck, os algoritmos representam coisas que um 
 
 Preste atenção para os relacionamentos entre as classes. Na verdade pegue sua caneta e escreva as relações apropriadamente (IS-A, HAS-A, e IMPLEMENTS) em cada seta nesse diagrama de classes.
 
-![Pseudo diagrama UML ](Duck-The-Big-Picture.png)
+![Duck-The-Big-Picture.png](images/Duck-The-Big-Picture.png)
 
 ## HAS-A pode ser melhor do que IS-A
 
@@ -288,12 +285,7 @@ Quando você põe duas classes juntas como essa, você está utilizando **compos
 
 Isso é uma técnica importante, na verdade, é a base do nosso terceiro princípio de design:
 
-<<<<<<< HEAD:src/chapter1/theduckgame/README.md
-### Design Principle
-Prefira composição ante herança
-=======
 ### **Design Principle: Prefira composição ante herança**
->>>>>>> 2e795569b0f8dc7b52dca038fdb13dfcb27b35f7:README.md
 
 Como você pôde ver, criar sistemas usando composition dá muito mais flexibiidade. Não somente permite você encapsular uma família de algoritmos em seus próprios conjuntos de classes, como também permite você **mudar o comportamento em runtime** desde que o objeto que você esteja compondo com implements a interface de comportamento correta.
 
